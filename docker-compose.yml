@@ -7,7 +7,7 @@ services:
     image: mysql:8.0
     restart: always
     environment:
-      MYSQL_DATABASE: 'db'
+      MYSQL_DATABASE: 'db_pizzamura'
       MYSQL_USER: 'uc_dewi'
       MYSQL_PASSWORD: 'uc_dewi_pass'
       MYSQL_ROOT_PASSWORD: 'admin'
@@ -24,7 +24,7 @@ services:
     image: adminer
     restart: always
     ports:
-      - 8080:8080
+      - 8085:8080
 
 volumes:
   my-db:
