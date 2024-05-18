@@ -43,7 +43,7 @@ Github link: https://github.com/oktavianidewi/pm2024-uc-dwh
 ### Steps
 #### 1. Install and connect dashboard (DBeaver) to access MySQL
 
-[!connect-dbeaver-mysql](./img/connect-dbeaver-mysql.png)
+![connect-dbeaver-mysql](./img/connect-dbeaver-mysql.png)
 
 #### 2. Feed data `products`, `users`, `orders`, `order_detail` to MySQL
 
@@ -75,7 +75,7 @@ via DBeaver, PhpMyAdmin or Adminer, copy and execute these SQL script:
         which aws
     ```
 - Configure our AWS account to AWS CLI. On AWS dashboard:
-[!security-credentials](./img/security-credentials.png)
+![security-credentials](./img/security-credentials.png)
 
 - Create security credential info or download csv file. 
 - Configure on our AWS CLI
@@ -87,17 +87,17 @@ via DBeaver, PhpMyAdmin or Adminer, copy and execute these SQL script:
         aws configure
     
     ```
-[!configured-credentials](./img/configured-credentials.png)
+![configured-credentials](./img/configured-credentials.png)
 
 - Change our zone to Singapore (`ap-southeast-1`) 
 
-[!zone](./img/ap-sountheast-1.png)
+![zone](./img/ap-sountheast-1.png)
 
 
 - Go to AWS S3 service, then Create S3 Bucket
 
-[!aws-s3](./img/aws-s3.png)
+![aws-s3](./img/aws-s3.png)
 
-[!create-s3-1](./img/create-s3-1.png)
+![create-s3-1](./img/create-s3-1.png)
 
-[!create-s3-2](./img/create-s3-2.png)
+![create-s3-2](./img/create-s3-2.png)
