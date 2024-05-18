@@ -26,6 +26,7 @@ CREATE TABLE products
 CREATE TABLE orders 
 (
     order_id    INT,
+    ordered_at  TIMESTAMP,
     user_id	    INT,
     total	    DOUBLE,
     created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
