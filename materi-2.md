@@ -15,10 +15,17 @@ Let's help Mr. James take "Pizzamura" to a higher and more sustainable level in 
 
 ### Metrics
 
-**Daily/Weekly/Monthly Sales:** Provides information on total sales over various time periods, helping Mr. James track sales performance over time.
-**Average Order Value:** Shows the average value of orders placed by customers, aiding in planning promotions or special offer packages.
-**Customer Purchase Frequency:** Provides insights into how often customers return to order, helping identify loyal customers and develop loyalty programs.
-**Best-Selling Items Analysis:** Identifies the most frequently sold items or menu items, enabling Mr. James to make better stock and promotional decisions.
+- **Daily/Weekly/Monthly Sales:** 
+Provides information on total sales over various time periods, helping Mr. James track sales performance over time.
+
+- **Average Order Value:** 
+Shows the average value of orders placed by customers, aiding in planning promotions or special offer packages.
+
+- **Customer Purchase Frequency:** 
+Provides insights into how often customers return to order, helping identify loyal customers and develop loyalty programs.
+
+- **Best-Selling Items Analysis:** 
+Identifies the most frequently sold items or menu items, enabling Mr. James to make better stock and promotional decisions.
 
 
 ## Problem Solving
