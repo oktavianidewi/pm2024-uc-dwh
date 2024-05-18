@@ -32,11 +32,11 @@ Identifies the most frequently sold items or menu items, enabling Mr. James to m
 
 ERD
 
-[ERD](./img/ERD.jpg)
+![ERD](./img/ERD.jpg)
 
 Proposed Data Warehouse
 
-[design-dwh](./img/design-dwh.jpg)
+![design-dwh](./img/design-dwh.jpg)
 
 Github link: https://github.com/oktavianidewi/pm2024-uc-dwh 
 
