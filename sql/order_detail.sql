@@ -1,0 +1,15 @@
+INSERT INTO order_detail (order_id, product_id, quantity, price, sub_total) VALUES ('707', '20', '1', '45.0', '45.0');
+INSERT INTO order_detail (order_id, product_id, quantity, price, sub_total) VALUES ('707', '76', '1', '450.0', '450.0');
+INSERT INTO order_detail (order_id, product_id, quantity, price, sub_total) VALUES ('1426', '36', '2', '335.0', '670.0');
+INSERT INTO order_detail (order_id, product_id, quantity, price, sub_total) VALUES ('254', '39', '2', '455.0', '910.0');
+INSERT INTO order_detail (order_id, product_id, quantity, price, sub_total) VALUES ('254', '25', '1', '295.0', '295.0');
+INSERT INTO order_detail (order_id, product_id, quantity, price, sub_total) VALUES ('493', '9', '1', '25.0', '25.0');
+INSERT INTO order_detail (order_id, product_id, quantity, price, sub_total) VALUES ('1528', '67', '2', '609.0', '1218.0');
+INSERT INTO order_detail (order_id, product_id, quantity, price, sub_total) VALUES ('1528', '78', '2', '99.0', '198.0');
+INSERT INTO order_detail (order_id, product_id, quantity, price, sub_total) VALUES ('463', '30', '2', '69.0', '138.0');
+INSERT INTO order_detail (order_id, product_id, quantity, price, sub_total) VALUES ('1227', '63', '1', '709.0', '709.0');
+INSERT INTO order_detail (order_id, product_id, quantity, price, sub_total) VALUES ('1227', '39', '1', '455.0', '455.0');
+INSERT INTO order_detail (order_id, product_id, quantity, price, sub_total) VALUES ('1231', '2', '1', '60.0', '60.0');
+INSERT INTO order_detail (order_id, product_id, quantity, price, sub_total) VALUES ('1231', '6', '2', '649.0', '1298.0');
+INSERT INTO order_detail (order_id, product_id, quantity, price, sub_total) VALUES ('1231', '12', '2', '119.0', '238.0');
+INSERT INTO order_detail (order_id, product_id, quantity, price, sub_total) VALUES ('79', '22', '2', '559.0', '1118.0');

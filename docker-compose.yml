@@ -1,31 +1,37 @@
-# Use root/example as user/password credentials
-version: '3.1'
+version: '3.8'
 
 services:
+    db:
+        image: mysql:latest
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: db
+            MYSQL_USER: dewi
+            MYSQL_PASSWORD: dewi
+        ports:
+            - "3306:3306"
+        volumes:
+            - ./data:/var/lib/mysql
+            - ./dataset/init_db.sql:/docker-entrypoint-initdb.d/init_db.sql
+            - ./sql_conf/mysql.cnf:/etc/mysql/conf.d/mysqld.cnf
 
-  db:
-    image: mysql:8.0
-    restart: always
-    environment:
-      MYSQL_DATABASE: 'db_pizzamura'
-      MYSQL_USER: 'uc_dewi'
-      MYSQL_PASSWORD: 'uc_dewi_pass'
-      MYSQL_ROOT_PASSWORD: 'admin'
-    ports:
-      - '3306:3306'
-    expose:
-      - '3306'
-    volumes:
-      - ./mysql:/var/lib/mysql
-      - ./sql:/docker-entrypoint-initdb.d
-      - ./sql_conf:/etc/mysql/conf.d
+    adminer:
+        image: adminer:latest
+        restart: always
+        ports:
+            - 8085:8080
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8085:8080
+    # phpmyadmin:
+    #     image: phpmyadmin/phpmyadmin:latest
+    #     restart: always
+    #     ports:
+    #         - 8087:80
+    #     environment:
+    #         PMA_HOST: db
+    #         PMA_PORT: 3306
+    #         PMA_ARBITRARY: 1
 
-volumes:
-  my-db:
-    
+networks:
+  docker-network:
+    external: true
