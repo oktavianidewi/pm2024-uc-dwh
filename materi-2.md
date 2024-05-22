@@ -63,17 +63,17 @@ via DBeaver, PhpMyAdmin or Adminer, copy and execute these SQL script:
 
 #### 3. Ingest data from MySQL to AWS S3 with Python
 
-- Ingestion code can be read [here](./mysql-to-s3.py)
-- Install these python libraries
-    ```
-    pip install pandas
-    pip install boto3
-    pip install mysql.connector
-    pip install sqlalchemy
-    pip install pymysql
-    ```
+##### Pre-requisites
 
-- Install AWS CLI
+- If your OS is Windows, please install WSL first. WSL is designed to allow developers and system administrators to run a GNU/Linux environment directly on Windows, without the need for a virtual machine or dual-boot setup. Follow the guide [here](https://learn.microsoft.com/en-us/windows/wsl/install). 
+    - If you encounter this error: `WslRegisterDistribution failed with error: 0x8004032d`, ) typically it indicates that WSL might not be properly enabled on your system. To solve this problem, you have to ensure that WSL is enabled [here](https://learn.microsoft.com/en-us/answers/questions/1424692/how-to-fix-wslregisterdistribution-failed-with-err).
+
+- While using macOS, you can rest assured
+
+
+##### a. Configure AWS CLI
+
+- If you're a WSL user, install AWS CLI using this command:
     ```
         curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
         sudo apt install unzip
@@ -81,7 +81,12 @@ via DBeaver, PhpMyAdmin or Adminer, copy and execute these SQL script:
         sudo ./aws/install
         which aws
     ```
-- Configure our AWS account to AWS CLI. On AWS dashboard:
+- For macOS user, install using this command: 
+    ```
+        brew install awscli
+    ```
+
+- After the installation is complete, let's configure our AWS account to AWS CLI. On AWS dashboard:
 ![security-credentials](./img/security-credentials.png)
 
 - Create security credential info or download csv file. 
@@ -108,3 +113,31 @@ via DBeaver, PhpMyAdmin or Adminer, copy and execute these SQL script:
 ![create-s3-1](./img/create-s3-1.png)
 
 ![create-s3-2](./img/create-s3-2.png)
+
+##### b. Install Python
+
+- To execute the ingestion code, we need to install Python on our OS (WSL/macOS).
+- To install Python on WSL, follow along these steps: 
+    ```
+    sudo apt-get update
+    sudo apt-get install build-essential zlib1g-dev libffi-dev libssl-dev libbz2-dev libreadline-dev libsqlite3-dev liblzma-dev python3.10
+    ```
+- Once the python and the required libraries are installed, check the installed python version with this command.
+    ```
+    python --version
+    ```
+- Ingestion code can be read [here](./mysql-to-s3.py)
+- Install these python libraries
+    ```
+    pip install pandas
+    pip install boto3
+    pip install mysql.connector
+    pip install sqlalchemy
+    pip install pymysql
+    ```
+- Update the ingestion code, modify the `MYSQL_USER`, `MYSQL_PASSWORD`, and `S3_BUCKET` varibles to your own config name.
+- Run ingestion code with this command
+    ```
+    python mysql-to-s3.py
+    ```
+- Navigate to your AWS S3 bucket. If your code executed correctly, you will see your files have been uploaded.
