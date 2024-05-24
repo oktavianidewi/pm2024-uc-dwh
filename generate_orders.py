@@ -60,7 +60,7 @@ class Order:
         return random_datetime
 
     def write_csv(data: list, header: list, filename:str):
-        with open(os.path.join(CURRENT_DIR, "dataset", filename), "w") as f:
+        with open(os.path.join(CURRENT_DIR, "dataset-temp", filename), "w") as f:
             writer = csv.writer(f)
             writer.writerow(header)
             for datum in data:
@@ -68,7 +68,7 @@ class Order:
 
     def read_csv(filename):
         rows: list = []
-        with open(os.path.join(CURRENT_DIR, "dataset", filename), "r") as f:
+        with open(os.path.join(CURRENT_DIR, "dataset-temp", filename), "r") as f:
             csvreader = csv.reader(f)
             header = next(csvreader)
             # header = ['name', 'description', 'price', 'category', 'image']

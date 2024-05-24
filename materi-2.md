@@ -129,11 +129,7 @@ via DBeaver, PhpMyAdmin or Adminer, copy and execute these SQL script:
 - Ingestion code can be read [here](./mysql-to-s3.py)
 - Install these python libraries
     ```
-    pip install pandas
-    pip install boto3
-    pip install mysql.connector
-    pip install sqlalchemy
-    pip install pymysql
+    pip install pandas boto3 mysql.connector sqlalchemy pymysql
     ```
 - Update the ingestion code, modify the `MYSQL_USER`, `MYSQL_PASSWORD`, and `S3_BUCKET` varibles to your own config name.
 - Run ingestion code with this command

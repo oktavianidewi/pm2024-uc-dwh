@@ -1,0 +1,210 @@
+# Outline
+
+# 0. [Review] Upload data from MySQL to S3
+
+# 1. Upload data from S3 to Redshift
+
+## Step 1: Create an IAM Role Access for Redshift to S3
+
+Creating an IAM role for Amazon Redshift to access Amazon S3 involves several steps. You need to create the IAM role in AWS, attach the necessary policies to grant S3 access, and then associate the IAM role with your Redshift cluster. Here’s a step-by-step guide:
+
+1. **Sign in to the AWS Management Console** and open the IAM console at [https://console.aws.amazon.com/iam/](https://console.aws.amazon.com/iam/).
+
+2. **Create a new role**:
+    - Click on **Roles** in the left-hand sidebar. Click on **Create role**.
+    ![roles-create-1](./img/materi-3/roles-create-1.png)
+    
+    - Select **Redshift** as the trusted entity.
+    ![roles-create-2](./img/materi-3/roles-create-2.png)
+
+    - Choose **Redshift - Customizable** and click **Next**.
+
+3. **Attach policies**:
+    - In the permissions policies, search for and select the policy **AmazonS3FullAccess**. This policy allows Redshift to access S3 with these actions:
+        - `s3:ListBucket` - List objects in a bucket.
+        - `s3:GetObject` - Retrieve an object from a bucket.
+        - `s3:PutObject` - Add an object to a bucket.
+        - `s3:DeleteObject` - Delete an object from a bucket.
+        - `s3:CreateBucket` - Create a new bucket.
+        - `s3:DeleteBucket` - Delete a bucket.
+        - `s3:PutBucketPolicy` - Apply a bucket policy.
+        - `s3:GetBucketPolicy` - Retrieve the bucket policy.
+        - `s3:PutBucketAcl` - Set the Access Control List (ACL) for a bucket.
+        - `s3:GetBucketAcl` - Get the ACL of a bucket.
+        - `s3:PutBucketLogging` - Set the logging parameters for a bucket.
+        - `s3:GetBucketLogging` - Retrieve the logging parameters of a bucket.
+    
+        ![roles-create-3](./img/materi-3/roles-create-3.png)
+
+    - Click **Next: Tags**.
+
+4. **Name your role**:
+    - Enter a role name, e.g., `redshift-s3-pizzamura`.
+    - Review the settings and click **Create role**.
+        ![roles-create-4](./img/materi-3/roles-create-4.png)
+    - IAM role is created
+        ![roles-create-5](./img/materi-3/roles-create-5.png)
+
+
+## Step 2: Create A Redshift Cluster 
+
+Amazon Redshift offers a free trial that includes 750 hours of usage per month for two months, along with up to 10 GB of compressed SSD storage. 
+
+1. Open the Amazon Redshift console at [Amazon Redshift Console](https://console.aws.amazon.com/redshift/).
+
+2. Change your region to **ap-southeast-1**. Click on **Create cluster**.
+
+3. **Cluster configuration**:
+    - **Cluster identifier**: Enter a unique name for your cluster.
+    - **Node type**: Choose `dc2.large` for the Free Tier.
+    - **Nodes**: Ensure it is set to `1` to stay within the Free Tier limits.
+    ![redshift-create-1](./img/materi-3/redshift-create-1.png)
+
+4. **Database configurations**:
+    - **Admin user name**: Enter a login ID for the admin user of your DB instance.
+    - **Admin password**: Choose the option to manually add the admin password, then set the admin password as per the requirement.
+    ![redshift-create-2](./img/materi-3/redshift-create-2.png)
+
+5. **Cluster Permissions**:
+    - Choose an IAM role that has the necessary permissions (e.g., access to S3 for data loading).
+    - Click **Manage IAM Roles**, then choose **Associate IAM Roles**
+    ![redshift-create-3](./img/materi-3/redshift-create-3.png)
+
+6. **Additional Configurations**:
+    - Uncheck the default settings and define the Network and security section ourselves.
+    ![redshift-create-6](./img/materi-3/redshift-create-6.png)
+
+7. **Network and Security**:
+    - Turn on **Publicly accessible** button so that we will be able to access our cluster from DBeaver.
+    ![redshift-create-7](./img/materi-3/redshift-create-7.png)
+
+8. **Review and Launch**:
+    - Review all your settings. Leave all other options as default.
+    - Click **Create cluster**. It will take around 10 minutes to create a cluster.
+
+## Step 3: Configure Security Groups
+
+A security group in AWS acts as a virtual firewall for your instance to control incoming and outgoing traffic. Specifically, inbound rules in a security group control the traffic that is allowed to reach the instance (in this case, an Amazon Redshift cluster) from external sources.
+By default, the security settings might be very restrictive to ensure the highest level of security. Ensure your cluster can be accessed by adding inbound rules to the security group associated with our redshift cluster:
+
+1. **Navigate to Redshift Clusters**: In the Amazon Redshift console, click on Clusters in the left-hand navigation pane to view your list of Redshift clusters.
+2. Click on the name of the Redshift cluster you want to configure. This will open the cluster details page.
+3. Find and select the **Properties** tab to view detailed information about the cluster.
+4. In the **Network and security** section of the **Properties** tab, look for the **VPC security groups**.
+    ![redshift-inbound-1](./img/materi-3/redshift-inbound-1.png)
+
+5. Click on the security group link. This will redirect you to the EC2 console where you can configure the security group.
+    ![redshift-inbound-2](./img/materi-3/redshift-inbound-2.png)
+
+6. **Add a New Inbound Rule:**
+    - Click on Add rule.
+    - Configure the rule as follows:
+        ![redshift-inbound-3](./img/materi-3/redshift-inbound-3.png)
+        - **Type**: Select **All TCP** (this will auto-fill the protocol and port range).
+        - **Protocol**: auto-fill.
+        - **Port range**: auto-fill.
+        - **Source**: Choose the IP address or range that should have access:
+            - **My IP**: Allows access from your current IP address.
+            - **Custom**: Enter a specific IP address or CIDR block (e.g., 203.0.113.0/24).
+            - **Anywhere**: Allows access from any IP address (0.0.0.0/0 for IPv4 or ::/0 for IPv6) - not recommended for production due to security risks, just for the learning purpose
+7. Click **Save Rule** button
+
+## Step 4: Connect to Your Redshift Cluster
+1. Use a SQL client like `psql`, DBeaver, or SQL Workbench/J to connect to your Redshift cluster. Copy JDBC 
+    ![dbeaver-redshift](./img/materi-3/dbeaver-redshift-1.png)
+
+2. Create a new connection to redshift
+    ![dbeaver-redshift](./img/materi-3/dbeaver-redshift-2.png)
+
+3. To connect, use the master username, password, endpoint, and port of your actual cluster endpoint information. 
+    ![dbeaver-redshift](./img/materi-3/dbeaver-redshift-3.png)
+
+4. Test connection 
+    ![dbeaver-test-con](./img/materi-3/dbeaver-test-con.png)
+
+## Step 4: Copy data from S3 to Redshift
+
+python code
+
+## Step 5: Setup DBT Project to Redshift
+
+### What is dbt?
+
+**dbt (data build tool)** is an open-source tool that enables data analysts and engineers to transform data in their data warehouse more effectively. It focuses on the **T** in ETL (Extract, Transform, Load) by providing a simple SQL-based workflow for transforming raw data into clean, modeled data that can be used for analytics. 
+
+### Why is dbt Essential to Data Engineers?
+
+1. **Efficient Data Transformation**:
+   - Data engineers often need to transform raw data into a more usable format for analysis. dbt simplifies this process by providing a framework to write, test, and manage SQL-based transformations.
+   
+2. **Improved Collaboration**:
+   - dbt's integration with version control systems like Git allows multiple data engineers and analysts to collaborate on data transformation projects, track changes, and manage versions efficiently.
+   
+3. **Data Quality Assurance**:
+   - By including testing capabilities, dbt helps data engineers ensure that their transformations are producing correct results, thereby maintaining high data quality.
+
+4. **Faster Development Cycles**:
+   - The modular approach of dbt allows for faster development and iteration of data models. Engineers can build and test individual parts of the data pipeline incrementally.
+   
+5. **Documentation and Data Lineage**:
+   - dbt automatically generates documentation and lineage information, making it easier for data engineers to understand and communicate how data is transformed throughout the pipeline.
+
+6. **Scalability and Maintainability**:
+   - As data projects grow in complexity, maintaining SQL scripts can become cumbersome. dbt helps organize these scripts into reusable and maintainable components, making it easier to scale data transformation efforts.
+
+### Example Use Case
+
+Consider a scenario where an organization needs to transform raw sales data into a format suitable for generating weekly sales reports. Using dbt, a data engineer can:
+
+1. **Define Models**: Write SQL scripts to clean, aggregate, and join raw sales data.
+2. **Manage Dependencies**: Use dbt to manage the order of transformations, ensuring data is processed correctly.
+3. **Test Data**: Implement tests to validate that sales data aggregates are accurate.
+4. **Generate Documentation**: Automatically generate and update documentation for the transformations.
+5. **Collaborate**: Use Git to collaborate with other engineers and analysts on the transformation logic.
+
+### Getting Started with dbt
+
+To get started with dbt, you can follow these basic steps:
+
+1. **Install dbt**: Install dbt using pip or another package manager.
+   ```sh
+   pip install dbt-core dbt-redshift
+   ```
+
+2. To verify that dbt and the dbt-redshift adapter are installed correctly, run:
+    ```sh
+    dbt --version
+    ```
+
+2. **Initialize a dbt Project**: Initialize a new dbt project.
+   ```sh
+   dbt init my_dbt_project
+   ```
+
+3. **Configure the Project**: Set up the `profiles.yml` file to configure database connections. 
+    By default, profiles.yml is located in the ~/.dbt/ directory. Create or modify this file to include your Redshift connection details: [profiles.yml](#).
+    Replace value of `host`, `user`, `password`, `database`, and `schema` with your actual Redshift cluster endpoint, user, password, database name, and schema.
+
+4. **Run Transformations**: Use dbt commands to run, test, and document your transformations.
+   ```sh
+   dbt run
+   dbt test
+   dbt docs generate
+   ```
+
+By incorporating dbt into data pipeline, data engineers can significantly streamline the process of transforming and managing data, leading to more efficient and reliable data pipelines.
+
+### Project Sources
+
+
+### Data Modelling
+
+### Fact Table Structure
+
+### 3. Update Records
+
+#### Product
+
+#### User
+
+#### Order
