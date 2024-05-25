@@ -131,12 +131,12 @@ By default, the security settings might be very restrictive to ensure the highes
 
 1. To copy a CSV file from Amazon S3 to Amazon Redshift, you can use the `COPY` command in Redshift. Here's a step-by-step guide and the corresponding Python code to perform this operation using the `boto3` library and `psycopg2` to interact with Redshift.
 
-    ```
+    ```sh
     pip install boto3 psycopg2
     ```
 
-    If that error, try this: 
-    ```
+    If error, try this: 
+    ```sh
     sudo apt install libpq-dev python3-dev
     pip install boto3 psycopg2
     ```
@@ -248,27 +248,51 @@ To get started with dbt, you can follow these basic steps:
    pip install git dbt-core dbt-redshift
    ```
 
-2. To verify that dbt and the dbt-redshift adapter are installed correctly, run:
+   If error, try this:
+   ```sh
+   pip install dbt-core dbt-redshift
+   ```
+
+3. To verify that dbt and the dbt-redshift adapter are installed correctly, run:
     ```sh
     dbt --version
     ```
     ![dbt](./img/materi-3/dbt-1.png)
 
-3. **Initialize a dbt Project**: Initialize a new dbt project.
+   **TRY TO CLOSE YOUR VSCODE / WSL, then OPEN it again**
+
+5. **Initialize a dbt Project**: Initialize a new dbt project, for example use `pizzamura_123`.
    ```sh
    dbt init [your-new-dir-for-dbt-project]
+
+   -- example code:
+   dbt init pizzamura_123
    ```
 
-4. **Configure the Project**: 
-    On the prompt, you'll be asked several informations about the config of database connections. By default, our answers is stored in a `profiles.yml` file that is located in the `~/.dbt/` directory. 
+6. **Configure the Project**: 
+    On the prompt, you'll be asked several informations about the config of database connections. By default, our answers is stored in a `profiles.yml` file that is located in the `~/.dbt/` directory.
+
+   **Prompt**
+   Which database would you like to use? **2**
+   host (hostname.region.redshift.amazonaws.com): [write down your Public IP Address] -> (Step 5 point 3)
+   port [5439]: [fill your redshift-cluster-port] -> (Step 5 point 3)
+   user (dev username): [fill your db-username] -> (Step 5 point 3)
+   Desired authentication method option (enter a number): **1**
+   password (dev password): [fill your db-password] -> (Step 5 point 3)
+   dbname (default database that dbt will build objects in): **dev**
+   schema (default schema that dbt will build objects in): **db_pizzamura**
+   threads (1 or more) [1]: **1**
     
     Otherwise, you can override the configuration. Just create or modify this [profiles.yml](./pizzamura_123/profiles.yml) with configuration of your Redshift connection details.
     Replace value of `host`, `user`, `password`, `database`, and `schema` with your actual Redshift cluster endpoint, user, password, database name, and schema.
 
-5. **Run Transformations**: Use dbt commands to debug your dbt connection to Redshift.
+8. **Run Transformations**: Use dbt commands to debug your dbt connection to Redshift.
    
     ```sh
-    dbt debug --project-dir [your-dbt-project-dir] --profiles-dir [your-dbt-project-dir]
+    dbt debug --project-dir [your-dbt-project-dir] --profiles-dir [your-dbt-dir]
+
+    #example code:
+    dbt debug --project-dir pizzamura_123 --profiles-dir .dbt
     ```
     
     ![dbt-debug-success](./img/materi-3/dbt-debug-success.png)
