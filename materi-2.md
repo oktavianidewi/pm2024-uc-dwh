@@ -128,9 +128,17 @@ via DBeaver, PhpMyAdmin or Adminer, copy and execute these SQL script:
     or
     python3 --version
     ```
-- Ingestion code can be read [here](./mysql-to-s3.py)
-- Install these python libraries
+ - Open IDE for viewing the ingestion python code, using this commmand will open VSCode.
     ```
+    code .
+    ```
+- Ingestion code can be read [here](./mysql-to-s3.py). Download the file.
+- Also download [prod.env](./prod.env)
+- In VSCode, create a new folder then add [mysql-to-s3.py](./mysql-to-s3.py) and [prod.env](./prod.env) to it.
+  ![vscode](./img/ingest-vscode.png)
+- From VSCode terminal (make sure ubuntu/WSL), Install these python libraries
+    ```
+    sudo apt install python3-pip
     pip install pandas boto3 mysql.connector sqlalchemy pymysql
     ```
 - Update the [prod.env](./prod.env), modify these varibles to your own config name.
@@ -144,6 +152,10 @@ via DBeaver, PhpMyAdmin or Adminer, copy and execute these SQL script:
     export MYSQL_DATABASE='YOUR_MYSQL_DATABASE'
     ```
     
+- Change the directory into our created folder.
+    ```
+    cd dw-aws
+    ```
 - Run ingestion code with this command
     ```
     source prod.env && python mysql-to-s3.py
