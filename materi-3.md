@@ -77,10 +77,10 @@ Amazon Redshift offers a free trial that includes 750 hours of usage per month f
 7. **Network and Security**:
     - Turn on **Publicly accessible** button so that we will be able to access our cluster from DBeaver.
     ![redshift-create-7](./img/materi-3/redshift-create-7.png)
-    - If "Cluster subnet group" is empty, then click on "create new subnet group" button. You will redirect into "Create cluster subnet group" window.
-    - In "Cluster subnet group details", leave the "Name" default, then copy the name into "Description". 
+    - If **Cluster subnet group** is empty, then click on **create new subnet group** button. You will redirect into **Create cluster subnet group** window.
+    - In **Cluster subnet group details**, leave the **Name** default, then copy the name into **Description**. 
       ![create-cluster-1](./img/materi-3/create-cluser-1.png)
-    - In "Add subnets", choose the available VPC, change Availability Zone into "ap-southeast-1a", choose available Subnet, then click "Add Subnet" button. For finish setting up, click "Create cluster subnet group" button. 
+    - In **Add subnets**, choose the available VPC, change Availability Zone into **ap-southeast-1a**, choose available Subnet, then click **Add Subnet** button. For finish setting up, click **Create cluster subnet group** button. 
       ![create-cluster-2](./img/materi-3/create-cluser-2.png)
 
 8. **Review and Launch**:
