@@ -149,7 +149,7 @@ By default, the security settings might be very restrictive to ensure the highes
         ![redshift-query-editor](./img/materi-3/redshift-query-3.png)
     
     c. Execute [this query](./sql/ddl_tables_redshift.sql) to create tables in Redshift
-        ![redshift-query](./img/materi-3/redshift-query-2.png)
+        ![redshift-query](./img/materi-3/redshift-query-4.png)
 
 3. Before move S3 to Redshift, modify file [prod.env](./prod.env) the redshift configuration as your actual cluster endpoint information.
 
