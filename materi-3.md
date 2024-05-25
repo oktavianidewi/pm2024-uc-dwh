@@ -131,25 +131,23 @@ By default, the security settings might be very restrictive to ensure the highes
 
 1. To copy a CSV file from Amazon S3 to Amazon Redshift, you can use the `COPY` command in Redshift. Here's a step-by-step guide and the corresponding Python code to perform this operation using the `boto3` library and `psycopg2` to interact with Redshift.
 
-```
-pip install boto3 psycopg2
-or
-pip install boto3 psycopg2-binary
-```
+    ```
+    pip install boto3 psycopg2
+    or
+    pip install boto3 psycopg2-binary
+    ```
 
 2. **Prepare the Redshift Table**. Ensure you have a table in Redshift that matches the schema of your CSV file. 
-    - Open DBeaver (that connect to redshift) or **Query editor on redshift** (see image below)
+    a. Open DBeaver (that connect to redshift) or **Query editor on redshift** (see image below)
         ![redshift-query](./img/materi-3/redshift-query-1.png)
 
-    - If use Query editor on redshift, click the cluster name then you will ask several option to connect to the redshiftDB. Choose **Temporary credentials using a database user name** and fill the user name with user name in step 2, point 4.
+    b. If use Query editor on redshift, click the cluster name then you will ask several option to connect to the redshiftDB. Choose **Temporary credentials using a database user name** and fill the user name with user name in step 2, point 4.
         ![redshift-query-editor](./img/materi-3/redshift-query-3.png)
     
-    - Execute [this query](./sql/ddl_tables_redshift.sql) to create tables in Redshift
+    c. Execute [this query](./sql/ddl_tables_redshift.sql) to create tables in Redshift
         ![redshift-query](./img/materi-3/redshift-query-2.png)
 
-3. Download [Python Script](./s3-to-redshift.py) and put it in VSCode (same folder with ingestion process). This code is to Execute the `COPY` Command from S3 to Redshift. 
-
-    Before running the script, modify file [prod.env](./prod.env) the redshift configuration as your actual cluster endpoint information.
+3. Before move S3 to Redshift, modify file [prod.env](./prod.env) the redshift configuration as your actual cluster endpoint information.
 
     ```
     export S3_BUCKET_NAME='YOUR_S3_BUCKET_NAME'
@@ -162,14 +160,36 @@ pip install boto3 psycopg2-binary
     export REDSHIFT_USER='YOUR_REDSHIFT_USER'
     export REDSHIFT_PASSWORD='YOUR_REDSHIFT_PASSWORD'
     ```
-
-    Go to Identity and Access Management (IAM) page, Roles (in the left side), choose Role that you create in Step 1, and copy `ARN` value to [prod.env](./prod.env) file
+    a. For S3_BUCKET_NAME, go to Amazon S3 page (see [image](./img/materi-3/created-s3.png)), and copy to `S3_BUCKET_NAME` value. *This created in [materi-2.md](./materi-2.md)*
+    b. For IAM_ROLE_ARN, go to Identity and Access Management (IAM) page, Roles (in the left side), choose Role that you create in Step 1, and copy `ARN` value.
     ![ingest-copy-arn](./img/materi-3/ingest-copy-arn.png)
+    c. For SCHEMA_NAME, use `db_pizzamura`. *This is related with Step 5, point 2.c*
+    d. For REDSHIFT_HOST, REDSHIFT_PORT, REDSHIFT_DBNAME, REDSHIFT_USER, go to Amazon Redshift page, choose your cluster.
+       - REDSHIFT_HOST is in **Node IP addresses** section. Copy Public IP address.
+       - REDSHIFT_PORT, REDSHIFT_DBNAME, REDSHIFT_USER is in **Database configurations** section. 
+   ![redshift-setting](./img/materi-3/redshift-setting.png)
+    e. For REDSHIFT_PASSWORD, type your password when create the Redshift cluster. *This is related with Step 2, point 4.c*
 
+    **Example Bu Indra**
+    ```
+    export S3_BUCKET_NAME='pizzamura-20210021'
+    export IAM_ROLE_ARN='arn:aws:iam::339712904580:role/redshift-s3-pizzamura'
+    export SCHEMA_NAME='db_pizzamura'
+    
+    export REDSHIFT_HOST='13.215.103.11'
+    export REDSHIFT_PORT='5439'
+    export REDSHIFT_DBNAME='dev'
+    export REDSHIFT_USER='awsuser'
+    export REDSHIFT_PASSWORD='awsUser-2024'
+    ```
+    
+5. Download [Python Script](./s3-to-redshift.py) and put it in VSCode (same folder with ingestion process). This code is to Execute the `COPY` Command from S3 to Redshift. 
     Run this command:
 
     ```
     source prod.env && python s3-to-redshift.py
+    or
+    source prod.env && python3 s3-to-redshift.py
     ```
 
     The Python script will transfer data from S3 to Redshift and display the log in the terminal.
