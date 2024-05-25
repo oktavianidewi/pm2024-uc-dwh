@@ -1,3 +1,7 @@
+-- CREATE DATABASE IF NOT EXISTS dw_aws;
+
+-- USE dw_aws;
+
 CREATE TABLE users 
 (
     id INT AUTO_INCREMENT PRIMARY KEY,
