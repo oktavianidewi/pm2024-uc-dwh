@@ -157,7 +157,7 @@ pip install boto3 psycopg2
     Run this command:
 
     ```
-    python s3-to-redshift.py
+    source prod.env && python s3-to-redshift.py
     ```
 
     The Python script will transfer data from S3 to Redshift and display the log in the terminal.

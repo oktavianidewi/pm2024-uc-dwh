@@ -131,10 +131,19 @@ via DBeaver, PhpMyAdmin or Adminer, copy and execute these SQL script:
     ```
     pip install pandas boto3 mysql.connector sqlalchemy pymysql
     ```
-- Update the ingestion code, modify the `MYSQL_USER`, `MYSQL_PASSWORD`, and `S3_BUCKET` varibles to your own config name.
+- Update the [prod.env](./prod.env), modify these varibles to your own config name.
+    ```
+    export S3_BUCKET_NAME='YOUR_S3_BUCKET_NAME'
+    export MYSQL_USER='YOUR_MYSQL_USER'
+    export MYSQL_PASSWORD='YOUR_MYSQL_PASSWORD'
+    export MYSQL_HOST='YOUR_MYSQL_HOST'
+    export MYSQL_PORT='YOUR_MYSQL_PORT'
+    export MYSQL_DATABASE='YOUR_MYSQL_DATABASE'
+    ```
+    
 - Run ingestion code with this command
     ```
-    python mysql-to-s3.py
+    source prod.env && python mysql-to-s3.py
     ```
 - Navigate to your AWS S3 bucket. If your code executed correctly, you will see your files have been uploaded.
     ![uploaded-csv-s3](./img/uploaded-csv-s3.png)
