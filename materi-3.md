@@ -273,7 +273,7 @@ To get started with dbt, you can follow these basic steps:
     On the prompt, you'll be asked several informations about the config of database connections. By default, our answers is stored in a `profiles.yml` file that is located in the `~/.dbt/` directory.
 
    **Prompt**
-   - Which database would you like to use? **2**
+   - Which database would you like to use? **Redshift**
    - host (hostname.region.redshift.amazonaws.com): [write down your Public IP Address] -> (Step 5 point 3) 
    - port [5439]: [fill your redshift-cluster-port] -> (Step 5 point 3) 
    - user (dev username): [fill your db-username] -> (Step 5 point 3) 
