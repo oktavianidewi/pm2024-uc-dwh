@@ -161,13 +161,17 @@ By default, the security settings might be very restrictive to ensure the highes
     export REDSHIFT_PASSWORD='YOUR_REDSHIFT_PASSWORD'
     ```
     a. For S3_BUCKET_NAME, go to Amazon S3 page (see [image](./img/materi-3/created-s3.png)), and copy to `S3_BUCKET_NAME` value. *This created in [materi-2.md](./materi-2.md)*
+   
     b. For IAM_ROLE_ARN, go to Identity and Access Management (IAM) page, Roles (in the left side), choose Role that you create in Step 1, and copy `ARN` value.
     ![ingest-copy-arn](./img/materi-3/ingest-copy-arn.png)
+   
     c. For SCHEMA_NAME, use `db_pizzamura`. *This is related with Step 5, point 2.c*
+   
     d. For REDSHIFT_HOST, REDSHIFT_PORT, REDSHIFT_DBNAME, REDSHIFT_USER, go to Amazon Redshift page, choose your cluster.
        - REDSHIFT_HOST is in **Node IP addresses** section. Copy Public IP address.
        - REDSHIFT_PORT, REDSHIFT_DBNAME, REDSHIFT_USER is in **Database configurations** section. 
    ![redshift-setting](./img/materi-3/redshift-setting.png)
+   
     e. For REDSHIFT_PASSWORD, type your password when create the Redshift cluster. *This is related with Step 2, point 4.c*
 
     **Example Bu Indra**
