@@ -265,7 +265,7 @@ To get started with dbt, you can follow these basic steps:
    ```sh
    dbt init [your-new-dir-for-dbt-project]
 
-   -- example code:
+   # example code:
    dbt init pizzamura_123
    ```
 
@@ -273,17 +273,20 @@ To get started with dbt, you can follow these basic steps:
     On the prompt, you'll be asked several informations about the config of database connections. By default, our answers is stored in a `profiles.yml` file that is located in the `~/.dbt/` directory.
 
    **Prompt**
-   Which database would you like to use? **2**
-   host (hostname.region.redshift.amazonaws.com): [write down your Public IP Address] -> (Step 5 point 3)
-   port [5439]: [fill your redshift-cluster-port] -> (Step 5 point 3)
-   user (dev username): [fill your db-username] -> (Step 5 point 3)
-   Desired authentication method option (enter a number): **1**
-   password (dev password): [fill your db-password] -> (Step 5 point 3)
-   dbname (default database that dbt will build objects in): **dev**
+   
+   Which database would you like to use? **2** |
+   
+   host (hostname.region.redshift.amazonaws.com): [write down your Public IP Address] -> (Step 5 point 3) | 
+   port [5439]: [fill your redshift-cluster-port] -> (Step 5 point 3) | 
+   user (dev username): [fill your db-username] -> (Step 5 point 3) | 
+   Desired authentication method option (enter a number): **1** | 
+   password (dev password): [fill your db-password] -> (Step 5 point 3) | 
+   dbname (default database that dbt will build objects in): **dev** | 
    schema (default schema that dbt will build objects in): **db_pizzamura**
    threads (1 or more) [1]: **1**
     
     Otherwise, you can override the configuration. Just create or modify this [profiles.yml](./pizzamura_123/profiles.yml) with configuration of your Redshift connection details.
+   
     Replace value of `host`, `user`, `password`, `database`, and `schema` with your actual Redshift cluster endpoint, user, password, database name, and schema.
 
 8. **Run Transformations**: Use dbt commands to debug your dbt connection to Redshift.
@@ -291,7 +294,7 @@ To get started with dbt, you can follow these basic steps:
     ```sh
     dbt debug --project-dir [your-dbt-project-dir] --profiles-dir [your-dbt-dir]
 
-    #example code:
+    # example code:
     dbt debug --project-dir pizzamura_123 --profiles-dir .dbt
     ```
     
