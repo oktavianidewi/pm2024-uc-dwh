@@ -77,6 +77,11 @@ Amazon Redshift offers a free trial that includes 750 hours of usage per month f
 7. **Network and Security**:
     - Turn on **Publicly accessible** button so that we will be able to access our cluster from DBeaver.
     ![redshift-create-7](./img/materi-3/redshift-create-7.png)
+    - If "Cluster subnet group" is empty, then click on "create new subnet group" button. You will redirect into "Create cluster subnet group" window.
+    - In "Cluster subnet group details", leave the "Name" default, then copy the name into "Description". 
+      ![redshift-create-7](./img/materi-3/create-cluster-1.png)
+    - In "Add subnets", choose the available VPC, change Availability Zone into "ap-southeast-1a", choose available Subnet, then click "Add Subnet" button. For finish setting up, click "Create cluster subnet grou" button. 
+      ![redshift-create-7](./img/materi-3/create-cluster-2.png)
 
 8. **Review and Launch**:
     - Review all your settings. Leave all other options as default.
@@ -109,7 +114,7 @@ By default, the security settings might be very restrictive to ensure the highes
             - **Anywhere**: Allows access from any IP address (0.0.0.0/0 for IPv4 or ::/0 for IPv6) - not recommended for production due to security risks, just for the learning purpose
 7. Click **Save Rule** button
 
-## Step 4: Connect to Your Redshift Cluster
+## Step 4: Connect to Your Redshift Cluster (Optional)
 1. Use a SQL client like `psql`, DBeaver, or SQL Workbench/J to connect to your Redshift cluster.
     ![dbeaver-redshift](./img/materi-3/dbeaver-redshift-1.png)
 
@@ -122,7 +127,7 @@ By default, the security settings might be very restrictive to ensure the highes
 4. Test connection 
     ![dbeaver-test-con](./img/materi-3/dbeaver-test-con.png)
 
-## Step 4: Copy data from S3 to Redshift
+## Step 5: Copy data from S3 to Redshift
 
 1. To copy a CSV file from Amazon S3 to Amazon Redshift, you can use the `COPY` command in Redshift. Here's a step-by-step guide and the corresponding Python code to perform this operation using the `boto3` library and `psycopg2` to interact with Redshift.
 
@@ -166,7 +171,7 @@ pip install boto3 psycopg2
     ![ingest-success](./img/materi-3/ingest-success.png)
 
 
-## Step 5: Setup DBT Project to Redshift
+## Step 6: Setup DBT Project to Redshift
 
 ### What is dbt?
 
