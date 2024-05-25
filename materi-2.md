@@ -137,3 +137,4 @@ via DBeaver, PhpMyAdmin or Adminer, copy and execute these SQL script:
     python mysql-to-s3.py
     ```
 - Navigate to your AWS S3 bucket. If your code executed correctly, you will see your files have been uploaded.
+    ![uploaded-csv-s3](./img/uploaded-csv-s3.png)

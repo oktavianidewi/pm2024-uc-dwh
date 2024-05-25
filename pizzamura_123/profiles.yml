@@ -1,0 +1,12 @@
+pizzamura_123:
+  outputs:
+    dev:
+      dbname: dev
+      host: [your-redshift-host]
+      password: [your-redshift-password]
+      port: 5439
+      schema: [your-redshift-schema]
+      threads: 1
+      type: redshift
+      user: [your-redshift-user]
+  target: dev

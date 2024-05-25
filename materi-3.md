@@ -1,6 +1,4 @@
-# Outline
-
-# 0. [Review] Upload data from MySQL to S3
+# Materi 3
 
 # 1. Upload data from S3 to Redshift
 
@@ -110,7 +108,7 @@ By default, the security settings might be very restrictive to ensure the highes
 7. Click **Save Rule** button
 
 ## Step 4: Connect to Your Redshift Cluster
-1. Use a SQL client like `psql`, DBeaver, or SQL Workbench/J to connect to your Redshift cluster. Copy JDBC 
+1. Use a SQL client like `psql`, DBeaver, or SQL Workbench/J to connect to your Redshift cluster.
     ![dbeaver-redshift](./img/materi-3/dbeaver-redshift-1.png)
 
 2. Create a new connection to redshift
@@ -124,7 +122,47 @@ By default, the security settings might be very restrictive to ensure the highes
 
 ## Step 4: Copy data from S3 to Redshift
 
-python code
+1. To copy a CSV file from Amazon S3 to Amazon Redshift, you can use the `COPY` command in Redshift. Here's a step-by-step guide and the corresponding Python code to perform this operation using the `boto3` library and `psycopg2` to interact with Redshift.
+
+```
+pip install boto3 psycopg2
+```
+
+2. **Prepare the Redshift Table**. Ensure you have a table in Redshift that matches the schema of your CSV file. 
+    - Open DBeaver (that connect to redshift) or query editor on redshift
+        ![redshift-query](./img/materi-3/redshift-query-1.png)
+
+    - Execute [this query](./sql/ddl_tables_redshift.sql) to create tables in Redshift
+        ![redshift-query](./img/materi-3/redshift-query-2.png)
+
+3. [Python Script](./s3-to-redshift.py) to Execute the `COPY` Command from S3 to Redshift. 
+
+    Before running the script, modify file [prod.env](./prod.env) the redshift configuration as your actual cluster endpoint information.
+
+    ```
+    export S3_BUCKET_NAME='YOUR_S3_BUCKET_NAME'
+    export IAM_ROLE_ARN='YOUR_IAM_ROLE_ARN'
+    export SCHEMA_NAME='YOUR_SCHEMA_NAME'
+
+    export REDSHIFT_HOST='YOUR_REDSHIFT_HOST'
+    export REDSHIFT_PORT='YOUR_REDSHIFT_PORT'
+    export REDSHIFT_DBNAME='YOUR_REDSHIFT_DBNAME'
+    export REDSHIFT_USER='YOUR_REDSHIFT_USER'
+    export REDSHIFT_PASSWORD='YOUR_REDSHIFT_PASSWORD'
+    ```
+
+    Go to Identity and Access Management (IAM) page and copy `ARN` value to [prod.env](./prod.env) file
+    ![ingest-copy-arn](./img/materi-3/ingest-copy-arn.png)
+
+    Run this command:
+
+    ```
+    python s3-to-redshift.py
+    ```
+
+    The Python script will transfer data from S3 to Redshift and display the log in the terminal.
+    ![ingest-success](./img/materi-3/ingest-success.png)
+
 
 ## Step 5: Setup DBT Project to Redshift
 
@@ -168,43 +206,32 @@ To get started with dbt, you can follow these basic steps:
 
 1. **Install dbt**: Install dbt using pip or another package manager.
    ```sh
-   pip install dbt-core dbt-redshift
+   pip install git dbt-core dbt-redshift
    ```
 
 2. To verify that dbt and the dbt-redshift adapter are installed correctly, run:
     ```sh
     dbt --version
     ```
+    ![dbt](./img/materi-3/dbt-1.png)
 
-2. **Initialize a dbt Project**: Initialize a new dbt project.
+3. **Initialize a dbt Project**: Initialize a new dbt project.
    ```sh
-   dbt init my_dbt_project
+   dbt init [your-new-dir-for-dbt-project]
    ```
 
-3. **Configure the Project**: Set up the `profiles.yml` file to configure database connections. 
-    By default, profiles.yml is located in the ~/.dbt/ directory. Create or modify this file to include your Redshift connection details: [profiles.yml](#).
+4. **Configure the Project**: 
+    On the prompt, you'll be asked several informations about the config of database connections. By default, our answers is stored in a `profiles.yml` file that is located in the `~/.dbt/` directory. 
+    
+    Otherwise, you can override the configuration. Just create or modify this [profiles.yml](./pizzamura_123/profiles.yml) with configuration of your Redshift connection details.
     Replace value of `host`, `user`, `password`, `database`, and `schema` with your actual Redshift cluster endpoint, user, password, database name, and schema.
 
-4. **Run Transformations**: Use dbt commands to run, test, and document your transformations.
-   ```sh
-   dbt run
-   dbt test
-   dbt docs generate
-   ```
+5. **Run Transformations**: Use dbt commands to debug your dbt connection to Redshift.
+   
+    ```sh
+    dbt debug --project-dir [your-dbt-project-dir] --profiles-dir [your-dbt-project-dir]
+    ```
+    
+    ![dbt-debug-success](./img/materi-3/dbt-debug-success.png)
 
-By incorporating dbt into data pipeline, data engineers can significantly streamline the process of transforming and managing data, leading to more efficient and reliable data pipelines.
-
-### Project Sources
-
-
-### Data Modelling
-
-### Fact Table Structure
-
-### 3. Update Records
-
-#### Product
-
-#### User
-
-#### Order
+    By incorporating dbt into data pipeline, data engineers can significantly streamline the process of transforming and managing data, leading to more efficient and reliable data pipelines.

@@ -4,3 +4,5 @@ data/
 .DS_Store
 .venv*
 img/.DS_Store
+local.env
+logs/

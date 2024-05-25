@@ -1,34 +1,29 @@
 import pandas as pd
-import mysql.connector
 import boto3
 from io import StringIO
-from datetime import datetime
-import uuid
-
-# S3 bucket details
-s3_bucket = 'pizzamura-123'
 from sqlalchemy import create_engine
 import pandas as pd
 import boto3
 from io import StringIO
+import os
 
 # MySQL connection details
-MYSQL_USER = 'dewi'
-MYSQL_PASSWORD = 'dewi'
-MYSQL_HOST = '127.0.0.1'  # or the Docker container IP
-MYSQL_PORT = '3306'
-MYSQL_DATABASE = 'db'
+MYSQL_USER = os.getenv('MYSQL_USER')
+MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD')
+MYSQL_HOST = os.getenv('MYSQL_HOST')  # or the Docker container IP
+MYSQL_PORT = os.getenv('MYSQL_PORT')
+MYSQL_DATABASE = os.getenv('MYSQL_DATABASE')
 
 # Create SQLAlchemy engine with allowPublicKeyRetrieval=true
-jdbc_url = f"mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DATABASE}"
+JDBC_URL = f"mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DATABASE}"
 
-engine = create_engine(jdbc_url)
-table_names = ["order_detail", "orders", "products", "users"]
+engine = create_engine(JDBC_URL)
+TABLE_NAMES = ["order_detail", "orders", "products", "users"]
 
 # S3 connection details
-S3_BUCKET = 'pizzamura-123'
+S3_BUCKET_NAME = os.getenv('S3_BUCKET_NAME')
 
-for table_name in table_names:
+for table_name in TABLE_NAMES:
     S3_KEY = f'surabaya/{table_name}.csv'
 
     # Connect to MySQL and execute query
@@ -47,6 +42,6 @@ for table_name in table_names:
 
     # Upload CSV to S3
     s3_client = boto3.client('s3')
-    s3_client.put_object(Bucket=S3_BUCKET, Key=S3_KEY, Body=csv_buffer.getvalue())
+    s3_client.put_object(Bucket=S3_BUCKET_NAME, Key=S3_KEY, Body=csv_buffer.getvalue())
 
     print(f"Data {table_name} uploaded to S3 successfully!")
