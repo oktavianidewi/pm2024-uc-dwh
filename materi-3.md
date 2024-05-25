@@ -2,6 +2,8 @@
 
 # 1. Upload data from S3 to Redshift
 
+![dwh](./img/design-dwh.jpg)
+
 ## Step 1: Create an IAM Role Access for Redshift to S3
 
 Creating an IAM role for Amazon Redshift to access Amazon S3 involves several steps. You need to create the IAM role in AWS, attach the necessary policies to grant S3 access, and then associate the IAM role with your Redshift cluster. Here’s a step-by-step guide:
