@@ -79,9 +79,9 @@ Amazon Redshift offers a free trial that includes 750 hours of usage per month f
     ![redshift-create-7](./img/materi-3/redshift-create-7.png)
     - If "Cluster subnet group" is empty, then click on "create new subnet group" button. You will redirect into "Create cluster subnet group" window.
     - In "Cluster subnet group details", leave the "Name" default, then copy the name into "Description". 
-      ![redshift-create-7](./img/materi-3/create-cluster-1.png)
-    - In "Add subnets", choose the available VPC, change Availability Zone into "ap-southeast-1a", choose available Subnet, then click "Add Subnet" button. For finish setting up, click "Create cluster subnet grou" button. 
-      ![redshift-create-7](./img/materi-3/create-cluster-2.png)
+      ![create-cluster-1](./img/materi-3/create-cluser-1.png)
+    - In "Add subnets", choose the available VPC, change Availability Zone into "ap-southeast-1a", choose available Subnet, then click "Add Subnet" button. For finish setting up, click "Create cluster subnet group" button. 
+      ![create-cluster-2](./img/materi-3/create-cluser-2.png)
 
 8. **Review and Launch**:
     - Review all your settings. Leave all other options as default.
