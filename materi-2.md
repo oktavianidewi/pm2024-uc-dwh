@@ -125,6 +125,8 @@ via DBeaver, PhpMyAdmin or Adminer, copy and execute these SQL script:
 - Once the python and the required libraries are installed, check the installed python version with this command.
     ```
     python --version
+    or
+    python3 --version
     ```
 - Ingestion code can be read [here](./mysql-to-s3.py)
 - Install these python libraries
@@ -134,6 +136,7 @@ via DBeaver, PhpMyAdmin or Adminer, copy and execute these SQL script:
 - Update the [prod.env](./prod.env), modify these varibles to your own config name.
     ```
     export S3_BUCKET_NAME='YOUR_S3_BUCKET_NAME'
+    
     export MYSQL_USER='YOUR_MYSQL_USER'
     export MYSQL_PASSWORD='YOUR_MYSQL_PASSWORD'
     export MYSQL_HOST='YOUR_MYSQL_HOST'
@@ -144,6 +147,8 @@ via DBeaver, PhpMyAdmin or Adminer, copy and execute these SQL script:
 - Run ingestion code with this command
     ```
     source prod.env && python mysql-to-s3.py
+    or
+    source prod.env && python3 mysql-to-s3.py
     ```
 - Navigate to your AWS S3 bucket. If your code executed correctly, you will see your files have been uploaded.
     ![uploaded-csv-s3](./img/uploaded-csv-s3.png)
