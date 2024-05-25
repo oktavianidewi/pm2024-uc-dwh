@@ -133,16 +133,21 @@ By default, the security settings might be very restrictive to ensure the highes
 
 ```
 pip install boto3 psycopg2
+or
+pip install boto3 psycopg2-binary
 ```
 
 2. **Prepare the Redshift Table**. Ensure you have a table in Redshift that matches the schema of your CSV file. 
-    - Open DBeaver (that connect to redshift) or query editor on redshift
+    - Open DBeaver (that connect to redshift) or **Query editor on redshift** (see image below)
         ![redshift-query](./img/materi-3/redshift-query-1.png)
 
+    - If use Query editor on redshift, click the cluster name then you will ask several option to connect to the redshiftDB. Choose **Temporary credentials using a database user name** and fill the user name with user name in step 2, point 4.
+        ![redshift-query-editor](./img/materi-3/redshift-query-3.png)
+    
     - Execute [this query](./sql/ddl_tables_redshift.sql) to create tables in Redshift
         ![redshift-query](./img/materi-3/redshift-query-2.png)
 
-3. [Python Script](./s3-to-redshift.py) to Execute the `COPY` Command from S3 to Redshift. 
+3. Download [Python Script](./s3-to-redshift.py) and put it in VSCode (same folder with ingestion process). This code is to Execute the `COPY` Command from S3 to Redshift. 
 
     Before running the script, modify file [prod.env](./prod.env) the redshift configuration as your actual cluster endpoint information.
 
@@ -158,7 +163,7 @@ pip install boto3 psycopg2
     export REDSHIFT_PASSWORD='YOUR_REDSHIFT_PASSWORD'
     ```
 
-    Go to Identity and Access Management (IAM) page and copy `ARN` value to [prod.env](./prod.env) file
+    Go to Identity and Access Management (IAM) page, Roles (in the left side), choose Role that you create in Step 1, and copy `ARN` value to [prod.env](./prod.env) file
     ![ingest-copy-arn](./img/materi-3/ingest-copy-arn.png)
 
     Run this command:
