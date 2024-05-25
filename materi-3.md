@@ -133,10 +133,14 @@ By default, the security settings might be very restrictive to ensure the highes
 
     ```
     pip install boto3 psycopg2
-    or
-    pip install boto3 psycopg2-binary
     ```
 
+    If that error, try this: 
+    ```
+    sudo apt install libpq-dev python3-dev
+    pip install boto3 psycopg2
+    ```
+    
 2. **Prepare the Redshift Table**. Ensure you have a table in Redshift that matches the schema of your CSV file. 
     a. Open DBeaver (that connect to redshift) or **Query editor on redshift** (see image below)
         ![redshift-query](./img/materi-3/redshift-query-1.png)
