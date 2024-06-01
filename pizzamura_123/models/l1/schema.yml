@@ -1,0 +1,43 @@
+
+version: 2
+
+models:
+  - name: stg_products
+    schema: l1
+    description: "products table without any duplicate data"
+    columns:
+      - name: product_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+
+  - name: stg_orders
+    schema: l1
+    description: "orders table without any duplicate data"
+    columns:
+      - name: order_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+
+  - name: stg_order_detail
+    schema: l1
+    description: "order_detail table without any duplicate data"
+    columns:
+      - name: order_detail_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+  
+  - name: stg_users
+    schema: l1
+    description: "users table without any duplicate data"
+    columns:
+      - name: user_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null

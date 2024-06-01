@@ -2,11 +2,11 @@ pizzamura_123:
   outputs:
     dev:
       dbname: dev
-      host: [your-redshift-host]
-      password: [your-redshift-password]
+      host: redshift-cluster-1.chokaeute2qo.ap-southeast-1.redshift.amazonaws.com
+      password: DewiPizzamura1
       port: 5439
-      schema: [your-redshift-schema]
+      schema: db_pizzamura
       threads: 1
       type: redshift
-      user: [your-redshift-user]
+      user:   
   target: dev

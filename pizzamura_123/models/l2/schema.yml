@@ -1,0 +1,33 @@
+
+version: 2
+
+models:
+  - name: dim_products
+    schema: l2
+    description: "dimension table for products"
+    columns:
+      - name: product_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+
+  - name: fact_orders_order_detail
+    schema: l2
+    description: "orders table without any duplicate data"
+    columns:
+      - name: order_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null
+  
+  - name: dim_users
+    schema: l2
+    description: "users table without any duplicate data"
+    columns:
+      - name: user_id
+        description: "The primary key for this table"
+        data_tests:
+          - unique
+          - not_null

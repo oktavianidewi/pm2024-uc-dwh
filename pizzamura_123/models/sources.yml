@@ -1,0 +1,36 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: db_pizzamura
+    tables:
+      - name: users
+        identifier: users
+      - name: products
+        identifier: products
+      - name: orders
+        identifier: orders
+      - name: order_detail
+        identifier: order_detail
+
+  - name: stg
+    schema: db_pizzamura_l1
+    tables:
+      - name: stg_users
+        identifier: stg_users
+      - name: stg_products
+        identifier: stg_products
+      - name: stg_orders
+        identifier: stg_orders
+      - name: stg_order_detail
+        identifier: stg_order_detail
+    
+  - name: dwh
+    schema: db_pizzamura_l2
+    tables:
+      - name: dim_users
+        identifier: dim_users
+      - name: dim_products
+        identifier: dim_products
+      - name: fact_orders_order_detail
+        identifier: fact_orders_order_detail
