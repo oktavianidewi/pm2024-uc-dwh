@@ -248,4 +248,11 @@ To create an account in AWS QuickSight and start a free trial, follow these step
 5. **Create Analysis:**
    - Click on “New Analysis” to start creating visualizations and analyses using your data.
 
+   ![qs-create-visuals-1](./img/materi-4/qs-create-visuals-1.png)
+
    ![qs-connect-6](./img/materi-4/qs-connect-6.png)
+
+6. **Analysis Result:**
+
+   ![qs-create-visuals-3](./img/materi-4/qs-create-visuals-3.png)
+
