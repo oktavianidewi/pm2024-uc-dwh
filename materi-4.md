@@ -32,7 +32,7 @@ Layered transformations provide a clear and logical structure to the data pipeli
 
 ## 1. Installing dbt package
 
-To install the package dependencies for your dbt project, use `dbt deps` command. See [packages.yml](./pizzamura_123/packages.yml) to find out the packages that is gonna be installed. 
+To install the package dependencies for your dbt project, use `dbt deps` command. See [packages.yml](./pizzamura_123/packages.yml) to find out the packages that is gonna be installed. (download [packages.yml](./pizzamura_123/packages.yml) first, and put it on pizzamura_123 directory)
 
 ![dbt-deps](./img/materi-4/dbt-deps.png)
 
